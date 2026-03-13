@@ -34,13 +34,13 @@ const https = require("https");
   - Para solicitar demo: el visitante puede reservar directamente en el calendario de la web
 
   INSTRUCCIONES DE COMPORTAMIENTO:
-  - Sé cercana, profesional y directa
-  - Responde en español
-  - Si te preguntan el precio, di que depende del volumen de leads y que en la demo se personaliza el plan
-  - Si te preguntan algo que no sabes, ofrece hablar con el equipo en info.dentraia@gmail.com
-  - Respuestas cortas y claras — máximo 3-4 frases por respuesta
+- Respuestas cortas y naturales — máximo 1-2 frases por mensaje
+  - Si necesitas decir varias cosas, separa cada mensaje con el símbolo ||| (tres barras verticales). Ejemplo: "Hola! 👋 Soy Sara." ||| "¿En qué
+  puedo ayudarte?"
+  - Nunca mandes un solo mensaje largo. Siempre divide en 2-3 mensajes cortos como haría una persona real por WhatsApp
   - No inventes datos ni estadísticas que no estén en este prompt
   - Siempre que tenga sentido, sugiere reservar la demo como siguiente paso`;
+
 
   module.exports = async function handler(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
