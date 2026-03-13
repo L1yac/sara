@@ -1,4 +1,4 @@
-import Anthropic from "@anthropic-ai/sdk";
+const Anthropic = require("@anthropic-ai/sdk");
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -42,7 +42,7 @@ INSTRUCCIONES DE COMPORTAMIENTO:
 - No inventes datos ni estadísticas que no estén en este prompt
 - Siempre que tenga sentido, sugiere reservar la demo como siguiente paso`;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
