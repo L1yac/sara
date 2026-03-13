@@ -1,7 +1,3 @@
-const Anthropic = require("@anthropic-ai/sdk");
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
 const SYSTEM_PROMPT = `Eres Sara, la asistente virtual de Dentraia. Tu función en este chat es responder dudas de directores y gerentes de clínicas dentales privadas que visitan la web de Dentraia.
 
 SOBRE DENTRAIA:
@@ -55,17 +51,37 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "messages array required" });
   }
 
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: "API key not configured" });
+  }
+
   try {
-    const response = await client.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 300,
-      system: SYSTEM_PROMPT,
-      messages: messages,
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 300,
+        system: SYSTEM_PROMPT,
+        messages: messages,
+      }),
     });
 
-    res.status(200).json({ reply: response.content[0].text });
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Anthropic error:", data);
+      return res.status(500).json({ error: "Error de API" });
+    }
+
+    res.status(200).json({ reply: data.content[0].text });
   } catch (err) {
-    console.error(err);
+    console.error("Handler error:", err);
     res.status(500).json({ error: "Error al conectar con Sara" });
   }
-}
+};
