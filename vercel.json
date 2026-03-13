@@ -1,7 +1,7 @@
- {                                                                                                                                                
-    "functions": {                                                                                                                                 
-      "api/chat.js": {                                      
-        "maxDuration": 15
-      }
-    }
+{
+  "functions": {
+    "api/chat.js": { "maxDuration": 15 },
+    "api/slots.js": { "maxDuration": 15 },
+    "api/book.js":  { "maxDuration": 15 }
   }
+}
