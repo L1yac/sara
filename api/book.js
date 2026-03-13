@@ -47,7 +47,7 @@ module.exports = async function handler(req, res) {
       },
     }, contactPayload);
 
-    const contactId = contactResult.data?.contact?.id;
+    const contactId = contactResult.data?.contact?.id || contactResult.data?.meta?.contactId;
     if (!contactId) {
       return res.status(500).json({ error: "No se pudo crear el contacto", detail: contactResult.data });
     }
