@@ -2,7 +2,7 @@ const https = require("https");
                                                                                                                                                    
   const SYSTEM_PROMPT = `Eres Sara, la asistente virtual de Dentraia. Tu función en este chat es responder dudas de directores y gerentes de 
   clínicas dentales privadas que visitan la web de Dentraia.                                                                                       
-                                         
+                                                            
   SOBRE DENTRAIA:
   - Dentraia es un SaaS B2B dental que convierte leads en citas confirmadas sin ampliar recepción
   - El producto principal es Sara, una asistente virtual que responde leads por WhatsApp en menos de 2 minutos
@@ -87,21 +87,19 @@ const https = require("https");
           try {
             const data = JSON.parse(body);
             if (response.statusCode !== 200) {
-              console.error("Anthropic error:", data);
               res.status(500).json({ error: "Error de API", detail: data });
             } else {
               res.status(200).json({ reply: data.content[0].text });
             }
           } catch (e) {
-            res.status(500).json({ error: "Error parsing response", detail: body });
+            res.status(500).json({ error: "Error parsing response" });
           }
           resolve();
         });
       });
 
       req2.on("error", (err) => {
-        console.error("HTTPS error:", err);
-        res.status(500).json({ error: "Error al conectar con Sara", detail: err.message });
+        res.status(500).json({ error: err.message });
         resolve();
       });
 
