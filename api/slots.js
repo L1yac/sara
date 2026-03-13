@@ -37,9 +37,10 @@ module.exports = async function handler(req, res) {
         try {
           const data = JSON.parse(body);
           const slots = [];
-          const dates = data._dates_ || {};
+          const dates = data._dates_ || data;
           for (const date of Object.keys(dates).sort()) {
-            const daySlots = dates[date].slots || [];
+            const dayData = dates[date];
+            const daySlots = Array.isArray(dayData) ? dayData : (dayData.slots || []);
             for (const slot of daySlots) {
               if (slots.length < 2) slots.push(slot);
             }
