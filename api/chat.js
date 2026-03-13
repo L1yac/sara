@@ -53,7 +53,7 @@ module.exports = async function handler(req, res) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: "API key not configured" });
+     return res.status(500).json({ error: "Error de API", detail: data });        
   }
 
   try {
