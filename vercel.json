@@ -1,9 +1,8 @@
-
-
-  {
-    "name": "sara-chat-api",
-    "version": "1.0.0",
-    "engines": {
-      "node": "18.x"
+                                                                                                                                                 
+  {                                                                                                                                                
+    "functions": {                                                                                                                                 
+      "api/chat.js": {                                                                                                                             
+        "maxDuration": 15                                   
+      }
     }
   }
